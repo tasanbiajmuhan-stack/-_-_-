@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Мои задачи</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-mark" href="#" aria-label="Мои задачи — на главную">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Декоративный двуглавый орёл и щит">
+        <path class="eagle" d="M31 17 20 9l-2 9-11-4 5 12-7 5 13 3 6 11 7-8 7 8 6-11 13-3-7-5 5-12-11 4-2-9-11 8Z"/>
+        <path class="eagle-cut" d="m14 22 11 7-8-1m33-6-11 7 8-1M22 39l8-5-3 11m15-6-8-5 3 11"/>
+        <path class="shield" d="M32 27 44 31v10c0 8-5 13-12 17-7-4-12-9-12-17V31l12-4Z"/>
+        <path class="shield-cross" d="M30 33h4v4h4v4h-4v4h-4v-4h-4v-4h4z"/>
+        <path class="crown" d="m23 17 2-6 7 4 7-4 2 6-9 4z"/>
+        <circle class="spark" cx="11" cy="42" r="2"/>
+        <circle class="spark" cx="53" cy="42" r="2"/>
+      </svg>
+    </a>
+
+    <div class="topbar-title" aria-hidden="true">
+      <span class="topbar-kicker">ПОРЯДОК В КАЖДОМ ДНЕ</span>
+      <span class="topbar-name">МОИ ЗАДАЧИ</span>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить на тёмную тему">
+      <span class="theme-icon" id="theme-icon" aria-hidden="true">☀️</span>
+      <span class="theme-label" id="theme-label">Светлая тема</span>
+    </button>
+  </header>
+
+  <main class="app">
+    <div class="page-ornament page-ornament-left" aria-hidden="true"></div>
+    <div class="page-ornament page-ornament-right" aria-hidden="true"></div>
+
+    <section class="todo-card" aria-labelledby="page-title">
+      <div class="card-corner corner-top-left" aria-hidden="true"></div>
+      <div class="card-corner corner-top-right" aria-hidden="true"></div>
+      <div class="card-corner corner-bottom-left" aria-hidden="true"></div>
+      <div class="card-corner corner-bottom-right" aria-hidden="true"></div>
+
+      <header class="card-header">
+        <div class="crest" aria-hidden="true">
+          <span class="crest-rays"></span>
+          <svg class="crest-shield" viewBox="0 0 72 82">
+            <path class="crest-crown" d="m25 13 3-8 8 5 8-5 3 8-11 6z"/>
+            <path class="crest-outline" d="M36 19 61 27v20c0 17-10 28-25 36C21 75 11 64 11 47V27z"/>
+            <path class="crest-fill" d="M36 24 56 30v17c0 14-8 23-20 30-12-7-20-16-20-30V30z"/>
+            <path class="crest-cross" d="M33 34h6v7h7v6h-7v7h-6v-7h-7v-6h7z"/>
+            <path class="crest-flint" d="M23 38c-2 2-2 5 0 7 2-2 2-5 0-7Zm26 0c-2 2-2 5 0 7 2-2 2-5 0-7Zm-26 11c-2 2-2 5 0 7 2-2 2-5 0-7Zm26 0c-2 2-2 5 0 7 2-2 2-5 0-7Z"/>
+          </svg>
+          <span class="crest-wing crest-wing-left"></span>
+          <span class="crest-wing crest-wing-right"></span>
+        </div>
+
+        <span class="eyebrow">ВАШ ПЛАН НА КАЖДЫЙ ДЕНЬ</span>
+        <h1 id="page-title">Мои задачи<span class="title-dot">.</span></h1>
+        <div class="title-divider" aria-hidden="true">
+          <span></span><b>✦</b><span></span>
+        </div>
+        <p class="subtitle">Соберите планы в одном месте — и двигайтесь к цели.</p>
+      </header>
+
+      <form class="task-form" id="task-form">
+        <label class="visually-hidden" for="task-input">Новая задача</label>
+        <input
+          id="task-input"
+          name="task"
+          type="text"
+          placeholder="Введите новую задачу..."
+          maxlength="200"
+          autocomplete="off"
+          required
+        >
+        <button class="add-button" type="submit">
+          <span class="plus" aria-hidden="true">+</span>
+          Добавить
+        </button>
+      </form>
+      <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+
+      <div class="stats-row" aria-live="polite">
+        <div class="stat-card">
+          <span class="stat-symbol stat-symbol-blue" aria-hidden="true">✥</span>
+          <span class="stat-label">Всего задач</span>
+          <span class="stat-value" id="task-count">0</span>
+        </div>
+        <span class="stats-divider" aria-hidden="true"></span>
+        <div class="stat-card">
+          <span class="stat-symbol stat-symbol-red" aria-hidden="true">✦</span>
+          <span class="stat-label">Выполнено</span>
+          <span class="stat-value" id="completed-count">0</span>
+        </div>
+      </div>
+
+      <div class="list-heading">
+        <h2>Список задач</h2>
+        <span class="list-caption"><span class="live-dot"></span> Ваш список</span>
+      </div>
+
+      <ul class="task-list" id="task-list" aria-label="Список задач"></ul>
+      <div class="empty-state" id="empty-state">
+        <span class="empty-ornament" aria-hidden="true">✥</span>
+        <p>Список задач пуст</p>
+        <span class="empty-hint">Добавьте первую задачу, чтобы начать</span>
+      </div>
+
+      <footer class="card-footer">
+        <span class="footer-pattern" aria-hidden="true"></span>
+        <span class="footer-text">Порядок начинается с малого</span>
+        <span class="footer-pattern footer-pattern-reverse" aria-hidden="true"></span>
+      </footer>
+    </section>
+
+    <p class="page-note"><span aria-hidden="true">✦</span> Найдите время для важного <span aria-hidden="true">✦</span></p>
+  </main>
+
+  <div class="tricolor-bar" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+</body>
+</html>
